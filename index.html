@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LÜM - El universo de recompensas mágicas. Transforma tus facturas en recompensas instantáneas con WhatsApp.">
+    <title>LÜM - Ilumina Tu Universo de Recompensas</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========== Variables y Reset ========== */
+        :root {
+            --primary: #3d79f8;
+            --primary-light: #5ca9ff;
+            --primary-dark: #2c5ce6;
+            --accent: #00d4ff;
+            --accent-warm: #ffa726;
+            --magic-glow: #64ffda;
+            --magic-purple: #bb86fc;
+            --dark-bg: #0a0f1b;
+            --dark-surface: #111827;
+            --dark-card: #1a2332;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-400: #94a3b8;
+            --gray-600: #64748b;
+            --gray-800: #1e293b;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-tertiary: rgba(255, 255, 255, 0.6);
+            --gradient-primary: linear-gradient(135deg, #3d79f8 0%, #00d4ff 100%);
+            --gradient-magic: linear-gradient(135deg, #64ffda 0%, #bb86fc 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0f1b 0%, #1a2332 100%);
+            --shadow-glow: 0 0 40px rgba(100, 255, 218, 0.3);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.2);
+            --blur-bg: blur(20px);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            background: var(--dark-bg);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========== Componentes Base ========== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 8px 32px rgba(61, 121, 248, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(61, 121, 248, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(93, 169, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        .btn-lg {
+            padding: 1.25rem 3rem;
+            font-size: 1.25rem;
+        }
+
+        .btn-xl {
+            padding: 1.5rem 4rem;
+            font-size: 1.5rem;
+        }
+
+        /* Efecto shimmer para botones */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* ========== Efectos Mágicos ========== */
+        .magic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .magic-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--magic-glow);
+            top: -200px;
+            right: -200px;
+            animation-duration: 25s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--magic-purple);
+            bottom: -150px;
+            left: -150px;
+            animation-duration: 30s;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-light);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, -30px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 50px) scale(0.9);
+            }
+            75% {
+                transform: translate(30px, 30px) scale(1.05);
+            }
+        }
+
+        /* Partículas flotantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--magic-glow);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-float 10s linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+        }
+
+        /* ========== Header ========== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 15, 27, 0.8);
+            backdrop-filter: var(--blur-bg);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        header.scrolled {
+            padding: 0.75rem 0;
+            background: rgba(10, 15, 27, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            filter: brightness(1.1);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-magic);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--magic-glow);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* ========== Hero Section ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 120px 0 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(100, 255, 218, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(187, 134, 252, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 167, 38, 0.15) 0%, transparent 50%);
+            animation: backgroundShift 15s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.875rem;
+            color: var(--magic-glow);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-magic);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== Sección Cómo Funciona ========== */
+        .how-section {
+            padding: 100px 0;
+            background: var(--dark-bg);
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gradient-text {
+            background: var(--gradient-magic);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            margin-top: 5rem;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: auto 1fr 300px;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .step:nth-child(even) {
+            grid-template-columns: 300px 1fr auto;
+        }
+
+        .step:nth-child(even) .step-number {
+            order: 3;
+        }
+
+        .step:nth-child(even) .step-visual {
+            order: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-magic);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--dark-bg);
+            box-shadow: 0 10px 40px rgba(100, 255, 218, 0.4);
+            position: relative;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-magic);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.2); opacity: 0; }
+        }
+
+        .step-content {
+            text-align: left;
+        }
+
+        .step:nth-child(even) .step-content {
+            text-align: right;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--magic-glow);
+            margin-bottom: 1rem;
+        }
+
+        .step-content h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .step-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            overflow: hidden;
+        }
+
+        .step-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .cta-center {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* ========== Sección de Recompensas ========== */
+        .rewards-section {
+            padding: 100px 0;
+            background: var(--dark-surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rewards-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .reward-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--magic-glow);
+        }
+
+        .reward-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--magic-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .reward-card:hover .reward-glow {
+            opacity: 0.1;
+        }
+
+        .reward-card.featured {
+            border-color: var(--primary-light);
+            transform: scale(1.05);
+        }
+
+        .reward-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .reward-icon {
+            font-size: 3.5rem;
+            color: var(--magic-glow);
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px var(--magic-glow));
+        }
+
+        .reward-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .reward-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .reward-value {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 20px;
+            padding: 0.5rem 1.25rem;
+            color: var(--magic-glow);
+            font-weight: 600;
+        }
+
+        /* ========== Sección Visual de la App ========== */
+        .app-showcase {
+            padding: 80px 0;
+            background: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .app-features {
+            display: flex;
+            gap: 2rem;
+            flex-direction: column;
+        }
+
+        .app-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .app-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-magic);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .app-feature-icon i {
+            color: var(--dark-bg);
+            font-size: 1.5rem;
+        }
+
+        .app-feature h4 {
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .app-feature p {
+            color: var(--text-tertiary);
+            margin: 0;
+        }
+
+        .app-visual {
+            position: relative;
+        }
+
+        .app-visual img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(100, 255, 218, 0.2);
+        }
+
+        .app-notification {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            box-shadow: 0 10px 30px rgba(61, 121, 248, 0.4);
+        }
+
+        .app-notification p {
+            margin: 0;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* ========== Sección de Estadísticas ========== */
+        .stats-section {
+            padding: 80px 0;
+            background: var(--dark-surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-magic);
+            opacity: 0.3;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-magic);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--magic-glow);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            color: var(--magic-glow);
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px var(--magic-glow));
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--white);
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-suffix {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            display: inline-block;
+            margin-left: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--magic-glow);
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== Sección de Testimonios ========== */
+        .testimonials-section {
+            padding: 100px 0;
+            background: var(--dark-bg);
+            overflow: hidden;
+        }
+
+        .testimonials-slider {
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .testimonial-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .testimonials-slider:hover .testimonial-track {
+            animation-play-state: paused;
+        }
+
+        .testimonial-card {
+            flex: 0 0 400px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.05);
+            border-color: var(--magic-glow);
+        }
+
+        .testimonial-stars {
+            color: #ffd700;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-stars i {
+            margin-right: 0.25rem;
+        }
+
+        .testimonial-card p {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-magic);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark-bg);
+        }
+
+        .author-info h4 {
+            color: var(--white);
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info span {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        /* ========== Sección Para Comercios ========== */
+        .business-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-bg) 100%);
+            position: relative;
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .business-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .business-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-light);
+            box-shadow: 0 20px 40px rgba(61, 121, 248, 0.2);
+        }
+
+        .business-icon {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .business-card h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .business-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .business-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* ========== Sección de Inversión ========== */
+        .investment-section {
+            padding: 120px 0;
+            background: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .investment-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .investment-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+
+        .investment-orb.orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--primary);
+            top: -300px;
+            right: -200px;
+        }
+
+        .investment-orb.orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--magic-glow);
+            bottom: -200px;
+            left: -100px;
+        }
+
+        .investment-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .investment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(61, 121, 248, 0.1);
+            border: 1px solid rgba(61, 121, 248, 0.3);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            color: var(--primary-light);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .investment-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .investment-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .investment-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .inv-stat {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .inv-stat-icon {
+            font-size: 3rem;
+            color: var(--magic-glow);
+            margin-bottom: 1.5rem;
+        }
+
+        .inv-stat h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .inv-stat p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .investment-features {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 32px;
+            padding: 3rem;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .investment-features h3 {
+            font-size: 2rem;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-item h4 {
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .investment-cta {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .investment-note {
+            margin-top: 1.5rem;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        .investment-note i {
+            margin-right: 0.5rem;
+        }
+
+        /* ========== FAQ Section ========== */
+        .faq-section {
+            padding: 100px 0;
+            background: var(--dark-surface);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-item:hover {
+            border-color: var(--magic-glow);
+            transform: translateY(-4px);
+        }
+
+        .faq-item h3 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .faq-item h3 i {
+            color: var(--magic-glow);
+            font-size: 1.5rem;
+        }
+
+        .faq-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            background: var(--dark-bg);
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .footer-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            bottom: -200px;
+            right: -200px;
+        }
+
+        .footer-main {
+            display: flex;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--magic-glow);
+            color: var(--dark-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+        }
+
+        .footer-links {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h4 {
+            color: var(--white);
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--magic-glow);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-tertiary);
+        }
+
+        /* ========== Mobile Menu ========== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            z-index: 9999;
+            transition: right 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-content {
+            padding: 2rem;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            .nav-menu, .nav-cta {
+                display: none;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .step {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .step:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            
+            .step:nth-child(even) .step-content {
+                text-align: center;
+                order: 2;
+            }
+            
+            .step-number {
+                margin: 0 auto;
+            }
+            
+            .step-visual {
+                margin: 0 auto;
+                max-width: 300px;
+            }
+            
+            .testimonial-track {
+                animation: none;
+            }
+            
+            .investment-stats {
+                flex-direction: column;
+            }
+            
+            .footer-main {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .app-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .app-visual {
+                order: -1;
+            }
+
+            .app-notification {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid,
+            .rewards-grid,
+            .business-grid,
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .investment-stats {
+                gap: 1rem;
+            }
+
+            .inv-stat {
+                min-width: auto;
+            }
+        }
+
+        /* ========== Animaciones AOS Override ========== */
+        [data-aos] {
+            transition-property: transform, opacity;
+            transition-duration: 0.8s;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="magic-bg">
+        <div class="magic-orb orb-1"></div>
+        <div class="magic-orb orb-2"></div>
+        <div class="magic-orb orb-3"></div>
+    </div>
+    
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-container">
+                <a href="#" class="logo">
+                    <img src="Logo + Isotipo.png" alt="LÜM Logo" width="auto" height="60">
+                </a>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#como-funciona">Cómo Funciona</a></li>
+                        <li><a href="#recompensas">Recompensas</a></li>
+                        <li><a href="#comercios">Para Comercios</a></li>
+                        <li><a href="#inversion">Inversión</a></li>
+                    </ul>
+                    
+                    <div class="nav-cta">
+                        <a href="#" class="btn btn-secondary">Acceso Admin</a>
+                        <a href="https://wa.me/50765906667" class="btn btn-primary">Empezar Ahora</a>
+                    </div>
+                </nav>
+                
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <img src="Logo + Isotipo.png" alt="LÜM Logo" width="auto" height="40">
+                <button class="mobile-menu-close" id="mobileMenuClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                <a href="#inicio">Inicio</a>
+                <a href="#como-funciona">Cómo Funciona</a>
+                <a href="#recompensas">Recompensas</a>
+                <a href="#comercios">Para Comercios</a>
+                <a href="#inversion">Inversión</a>
+            </nav>
+            <a href="https://wa.me/50765906667" class="btn btn-whatsapp btn-block">
+                <i class="fab fa-whatsapp"></i>
+                Empezar por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- 1. Hero Section (Inicio) -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i>
+                    <span>La revolución de las recompensas llegó a Panamá</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Transforma tus facturas en<br>
+                    <span class="gradient-text">recompensas mágicas</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Escanea tus facturas, envíanos por WhatsApp y gana Lümis instantáneamente. 
+                    Sin apps, sin complicaciones. Solo magia pura en cada compra.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="https://wa.me/50765906667" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        Empezar por WhatsApp
+                    </a>
+                    <a href="#como-funciona" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        Ver cómo funciona
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Cómo Funciona -->
+    <section class="how-section" id="como-funciona">
+        <div class="container">
+            <div class="how-content">
+                <h2 class="section-title">
+                    Tan simple como <span class="gradient-text">1, 2, 3</span>
+                </h2>
+                <p class="section-subtitle">
+                    Sin apps, sin complicaciones. Solo WhatsApp y magia.
+                </p>
+                
+                <div class="steps-container">
+                    <div class="step" data-aos="fade-right">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <h3>Escanea tu factura</h3>
+                            <p>Toma una foto del código QR de tu factura o reenvía el correo con tu recibo digital</p>
+                        </div>
+                        <div class="step-visual">
+                            <div style="background: var(--gradient-magic); height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-qrcode" style="font-size: 4rem; color: var(--dark-bg);"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step" data-aos="fade-up">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3>Envía por WhatsApp</h3>
+                            <p>Nuestro bot mágico procesará tu factura instantáneamente y te dará tus Lümis</p>
+                        </div>
+                        <div class="step-visual">
+                            <div style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fab fa-whatsapp" style="font-size: 4rem; color: white;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step" data-aos="fade-left">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h3>Disfruta recompensas</h3>
+                            <p>Canjea tus Lümis por descuentos, productos, experiencias y mucho más</p>
+                        </div>
+                        <div class="step-visual">
+                            <div style="background: var(--gradient-primary); height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-gift" style="font-size: 4rem; color: white;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-center">
+                    <a href="https://wa.me/50765906667" class="btn btn-whatsapp btn-lg">
+                        <i class="fab fa-whatsapp"></i>
+                        Empezar ahora mismo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Recompensas -->
+    <section class="rewards-section" id="recompensas">
+        <div class="container">
+            <div class="rewards-content">
+                <h2 class="section-title">
+                    Un universo de <span class="gradient-text">recompensas mágicas</span>
+                </h2>
+                <p class="section-subtitle">
+                    Cada Lümi que ganas te acerca a experiencias increíbles
+                </p>
+                
+                <div class="rewards-grid">
+                    <div class="reward-card">
+                        <div class="reward-glow"></div>
+                        <div class="reward-icon">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <h3>Radar de Ofertas</h3>
+                        <p>Alertas personalizadas cuando bajen los precios de tus productos favoritos</p>
+                        <div class="reward-value">
+                            <i class="fas fa-coins"></i> 30 Lümis
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card featured">
+                        <div class="reward-glow"></div>
+                        <div class="reward-badge">Más Popular</div>
+                        <div class="reward-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3>Gift Cards</h3>
+                        <p>Tarjetas de regalo para tus tiendas favoritas</p>
+                        <div class="reward-value">
+                            <i class="fas fa-coins"></i> Desde 500 Lümis
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-glow"></div>
+                        <div class="reward-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3>Lümiscope</h3>
+                        <p>Descubre insights únicos sobre tus hábitos de consumo</p>
+                        <div class="reward-value">
+                            <i class="fas fa-coins"></i> 30 Lümis / 30días
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-glow"></div>
+                        <div class="reward-icon">
+                            <i class="fas fa-dice"></i>
+                        </div>
+                        <h3>Tómbolas Mágicas</h3>
+                        <p>Participa en sorteos exclusivos con premios increíbles</p>
+                        <div class="reward-value">
+                            <i class="fas fa-coins"></i> desde 50 Lümis
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-glow"></div>
+                        <div class="reward-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Lümis Solidaria</h3>
+                        <p>Dona tus Lümis a causas sociales y marca la diferencia</p>
+                        <div class="reward-value">
+                            <i class="fas fa-coins"></i> Cualquier cantidad
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-glow"></div>
+                        <div class="reward-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>Experiencias VIP</h3>
+                        <p>Acceso exclusivo a promociones y experiencias de comercios aliados</p>
+                        <div class="reward-value">
+                            <i class="fas fa-coins"></i> +500 Lümis
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. App Showcase (Visual) -->
+    <section class="app-showcase">
+        <div class="container">
+            <div class="app-grid">
+                <div>
+                    <h2 class="section-title" style="text-align: left;">
+                        La magia está en <span class="gradient-text">tus manos</span>
+                    </h2>
+                    <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">
+                        Una experiencia completamente nueva donde cada compra se convierte en una oportunidad. 
+                        Sin apps complicadas, todo fluye naturalmente a través de WhatsApp.
+                    </p>
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <div class="app-feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4>Instantáneo</h4>
+                                <p>Recibe tus Lümis al instante</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <div class="app-feature-icon">
+                                <i class="fas fa-shield-check"></i>
+                            </div>
+                            <div>
+                                <h4>Seguro</h4>
+                                <p>Encriptación de grado bancario</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <div class="app-feature-icon">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <div>
+                                <h4>Mágico</h4>
+                                <p>Experiencia única e inolvidable</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-visual">
+                    <div style="background: var(--gradient-magic); border-radius: 24px; height: 400px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <i class="fas fa-mobile-alt" style="font-size: 8rem; color: var(--dark-bg); opacity: 0.8;"></i>
+                        <div class="app-notification">
+                            <p>+50 Lümis ganados!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Estadísticas -->
+    <section class="stats-section" id="estadisticas">
+        <div class="container">
+            <div class="stats-content">
+                <h2 class="section-title">
+                    <span class="gradient-text">Números que brillan</span>
+                </h2>
+                <p class="section-subtitle">
+                    LÜM está transformando el mercado de recompensas en América Latina
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-number">$2.5</div>
+                        <div class="stat-suffix">B</div>
+                        <div class="stat-label">Mercado de Lealtad</div>
+                        <div class="stat-description">
+                            Oportunidad de mercado en rápido crecimiento en la región
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-number">93</div>
+                        <div class="stat-suffix">%</div>
+                        <div class="stat-label">Penetración WhatsApp</div>
+                        <div class="stat-description">
+                            La plataforma perfecta para llegar a todos sin fricciones
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" >
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">450</div>
+                        <div class="stat-suffix">M</div>
+                        <div class="stat-label">Usuarios Digitales en LATAM</div>
+                        <div class="stat-description">
+                            Acceso a una base masiva de consumidores listos para la revolución de recompensas
+                        </div>
+                    </div>
+                   
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Testimonios -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">
+                Lo que dicen nuestros <span class="gradient-text">usuarios mágicos</span>
+            </h2>
+            <p class="section-subtitle">
+                Historias reales de personas que han transformado sus compras en recompensas
+            </p>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-track">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Es increíble cómo algo tan simple puede ser tan poderoso. Cada compra ahora es una oportunidad de ganar algo extra."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <h4>María González</h4>
+                                <span>Emprendedora, Ciudad de Panamá</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Mi familia ahora se emociona con cada factura. Los niños hasta me ayudan a escanear los códigos QR."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">C</div>
+                            <div class="author-info">
+                                <h4>Carlos Ruiz</h4>
+                                <span>Padre de familia, San Miguelito</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"La experiencia es mágica. Ya he canjeado gift cards y participado en tómbolas. ¡Es adictivo!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">A</div>
+                            <div class="author-info">
+                                <h4>Ana Herrera</h4>
+                                <span>Estudiante universitaria, Chitré</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Como empresario, me encanta ver cómo la tecnología puede hacer que algo tan simple sea tan gratificante."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">R</div>
+                            <div class="author-info">
+                                <h4>Roberto Silva</h4>
+                                <span>CEO, David</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Duplicados para el efecto de scroll infinito -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Es increíble cómo algo tan simple puede ser tan poderoso. Cada compra ahora es una oportunidad de ganar algo extra."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <h4>María González</h4>
+                                <span>Emprendedora, Ciudad de Panamá</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Mi familia ahora se emociona con cada factura. Los niños hasta me ayudan a escanear los códigos QR."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">C</div>
+                            <div class="author-info">
+                                <h4>Carlos Ruiz</h4>
+                                <span>Padre de familia, San Miguelito</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Comercios -->
+    <section class="business-section" id="comercios">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="gradient-text">Potencia tu negocio</span> con LÜM
+            </h2>
+            <p class="section-subtitle">
+                Atrae más clientes, aumenta la lealtad y genera datos valiosos para tu comercio
+            </p>
+            
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Más Clientes</h3>
+                    <p>Atrae nuevos consumidores que buscan recompensas por sus compras y aumenta tu tráfico de manera orgánica.</p>
+                </div>
+                
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-heart-circle-check"></i>
+                    </div>
+                    <h3>Mayor Lealtad</h3>
+                    <p>Convierte compradores ocasionales en clientes fieles que regresan por las recompensas exclusivas.</p>
+                </div>
+                
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Insights Valiosos</h3>
+                    <p>Obtén datos de consumo en tiempo real para optimizar tu inventario y estrategias de marketing.</p>
+                </div>
+                
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Cero Fricciones</h3>
+                    <p>Integración simple sin necesidad de apps adicionales. Tus clientes solo necesitan WhatsApp.</p>
+                </div>
+                
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Marketing Directo</h3>
+                    <p>Comunícate directamente con tus clientes más valiosos a través de nuestra plataforma.</p>
+                </div>
+                
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Partnership Estratégico</h3>
+                    <p>Forma parte del ecosistema de recompensas más innovador de América Latina.</p>
+                </div>
+            </div>
+            
+            <div class="business-cta">
+                <a href="mailto:promociones@lumapp.org" class="btn btn-primary btn-lg">
+                    <i class="fas fa-store"></i>
+                    Únete a LÜM
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Inversión -->
+    <section class="investment-section" id="inversion">
+        <div class="investment-bg">
+            <div class="investment-orb orb-1"></div>
+            <div class="investment-orb orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="investment-header">
+                <div class="investment-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Oportunidad de Inversión</span>
+                </div>
+                
+                <h2 class="investment-title">
+                    Invierte en el <span class="gradient-text">futuro de las recompensas</span>
+                </h2>
+                
+                <p class="investment-subtitle">
+                    Únete a la revolución que está transformando la forma en que las personas interactúan con las marcas en América Latina
+                </p>
+            </div>
+            
+            <div class="investment-stats">
+                <div class="inv-stat">
+                    <div class="inv-stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Mercado en Crecimiento</h3>
+                    <p>El mercado de programas de lealtad en LATAM crecerá 15% anual hasta 2028, alcanzando $4.2B</p>
+                </div>
+                
+                <div class="inv-stat">
+                    <div class="inv-stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Base de Usuarios Masiva</h3>
+                    <p>450M de usuarios de WhatsApp en la región, nuestra plataforma natural de distribución</p>
+                </div>
+                
+                <div class="inv-stat">
+                    <div class="inv-stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Ventaja Competitiva</h3>
+                    <p>Primera plataforma de recompensas basada 100% en WhatsApp, eliminando fricciones de adopción</p>
+                </div>
+            </div>
+            
+            <div class="investment-features">
+                <h3>¿Por qué invertir en LÜM?</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-brain"></i>
+                        <h4>Tecnología Pionera</h4>
+                        <p>IA avanzada para procesamiento de facturas y personalización de recompensas</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <i class="fas fa-network-wired"></i>
+                        <h4>Efecto de Red</h4>
+                        <p>Cada usuario y comercio añade valor exponencial a la plataforma</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <i class="fas fa-globe-americas"></i>
+                        <h4>Escalabilidad Regional</h4>
+                        <p>Modelo probado listo para expandirse por toda América Latina</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <i class="fas fa-coins"></i>
+                        <h4>Múltiples Ingresos</h4>
+                        <p>Comisiones, partnerships, data insights y servicios premium</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Equipo Probado</h4>
+                        <p>Fundadores con experiencia en fintech y tecnología en la región</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <i class="fas fa-rocket"></i>
+                        <h4>Tracción Temprana</h4>
+                        <p>Ya operando con usuarios activos y comercios asociados</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="investment-cta">
+                <a href="mailto:inversion@lumapp.org" class="btn btn-primary btn-xl">
+                    <i class="fas fa-handshake"></i>
+                    Quiero invertir
+                </a>
+                <div class="investment-note">
+                    <i class="fas fa-info-circle"></i>
+                    Solo para inversionistas acreditados. Presentación ejecutiva disponible bajo NDA.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">
+                Preguntas <span class="gradient-text">frecuentes</span>
+            </h2>
+            <p class="section-subtitle">
+                Todo lo que necesitas saber sobre LÜM y cómo funciona la magia
+            </p>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>
+                        <i class="fas fa-question-circle"></i>
+                        ¿Cómo empiezo a ganar Lümis?
+                    </h3>
+                    <p>Es súper fácil. Solo envía un mensaje a nuestro WhatsApp, escanea el código QR de tu factura o reenvía tu recibo digital, y ¡listo! Recibirás tus Lümis instantáneamente.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>
+                        <i class="fas fa-mobile-alt"></i>
+                        ¿Necesito descargar una app?
+                    </h3>
+                    <p>¡No! Esa es la magia de LÜM. Todo funciona a través de WhatsApp, que ya tienes en tu teléfono. Sin apps adicionales, sin complicaciones.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>
+                        <i class="fas fa-coins"></i>
+                        ¿Qué puedo hacer con mis Lümis?
+                    </h3>
+                    <p>Puedes canjearlos por gift cards, participar en tómbolas, acceder a ofertas exclusivas, experiencias VIP, o incluso donarlos a causas sociales. Las opciones crecen constantemente.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>
+                        <i class="fas fa-receipt"></i>
+                        ¿Qué tipos de facturas puedo escanear?
+                    </h3>
+                    <p>Aceptamos facturas de supermercados, restaurantes, tiendas, gasolineras, farmacias y más. Si tiene código QR o es un recibo digital, probablemente podemos procesarlo.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>
+                        <i class="fas fa-shield-check"></i>
+                        ¿Es seguro compartir mis facturas?
+                    </h3>
+                    <p>Absolutamente. Utilizamos encriptación de grado bancario y nunca compartimos tu información personal. Solo procesamos los datos necesarios para darte tus recompensas.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>
+                        <i class="fas fa-clock"></i>
+                        ¿Cuánto tardan en llegar mis Lümis?
+                    </h3>
+                    <p>¡Son instantáneos! Una vez que envías tu factura por WhatsApp, nuestro bot mágico la procesa y te acredita los Lümis en segundos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Footer -->
+    <footer class="footer">
+        <div class="footer-bg">
+            <div class="footer-orb"></div>
+        </div>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="Logo + Isotipo.png" alt="LÜM Logo" width="auto" height="40">
+                    </div>
+                    <p class="footer-tagline">
+                        Iluminamos tu universo de recompensas, transformando cada compra en una experiencia mágica.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://wa.me/50765906667" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Producto</h4>
+                        <ul>
+                            <li><a href="#como-funciona">Cómo Funciona</a></li>
+                            <li><a href="#recompensas">Recompensas</a></li>
+                            <li><a href="#">Descargar App</a></li>
+                            <li><a href="#">Soporte</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Comercios</h4>
+                        <ul>
+                            <li><a href="#comercios">Para Comercios</a></li>
+                            <li><a href="#">Registro de Socios</a></li>
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">API Developers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Empresa</h4>
+                        <ul>
+                            <li><a href="#">Sobre Nosotros</a></li>
+                            <li><a href="#inversion">Inversores</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="mailto:contacto@lumapp.org">Contacto</a></li>
+                            <li><a href="#">Términos de Uso</a></li>
+                            <li><a href="#">Privacidad</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 LÜM. Todos los derechos reservados. Hecho con ✨ en Panamá.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Particle animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 20000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+        
+        // Create initial particles
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createParticle, i * 400);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simple AOS-like animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with data-aos attribute
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = counter.textContent.replace(/[^0-9.]/g, '');
+                const increment = target / 50;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (counter.textContent.includes('
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+  
+                         + current.toFixed(1);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 50);
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsSection = document.getElementById('estadisticas');
+        if (statsSection) {
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statsObserver.observe(statsSection);
+        }
+ 
