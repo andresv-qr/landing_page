@@ -1526,6 +1526,33 @@
             transition-duration: 0.8s;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         }
+        /* Solución de OpenAI para orden */
+		@media (max-width: 768px) {
+  .step {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .step:nth-child(even) {
+    grid-template-columns: unset;
+  }
+
+  .step:nth-child(even) .step-number,
+  .step:nth-child(even) .step-content,
+  .step:nth-child(even) .step-visual {
+    order: unset;
+    text-align: center;
+  }
+
+  .step-content {
+    text-align: center !important;
+  }
+
+  .step-visual {
+    margin-top: 1rem;
+  }
+}
     </style>
 </head>
 <body>
