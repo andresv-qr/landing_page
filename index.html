@@ -2466,8 +2466,8 @@
             observer.observe(el);
         });
 
-        // Counter animation for stats
-     function animateCounters() {
+ // Counter animation for stats
+function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
     counters.forEach(counter => {
         const target = parseInt(counter.textContent.replace(/[^0-9]/g, ''), 10);
@@ -2485,4 +2485,18 @@
     });
 }
 
- </script>
+// Trigger counter animation when stats section is visible
+const statsSection = document.getElementById('estadisticas');
+if (statsSection) {
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statsObserver.observe(statsSection);
+}
+</script>
